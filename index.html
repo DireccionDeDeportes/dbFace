@@ -1,0 +1,72 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Registro de Jugadores</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="importmap">
+    {
+        "imports": {
+            "idb": "https://cdn.jsdelivr.net/npm/idb@7/+esm"
+        }
+    }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+    <script src="app.js" type="module"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sistema de Registro de Jugadores</h1>
+            <nav>
+                <button id="btnRegistro" class="tab-btn active">Registro</button>
+                <button id="btnDatos" class="tab-btn">Exportar Datos</button>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Sección de Registro -->
+            <section id="seccionRegistro" class="active">
+                <h2>Registro de Nuevo Jugador</h2>
+                <form id="formRegistro">
+                    <div class="form-group">
+                        <label for="dni">DNI:</label>
+                        <input type="text" id="dni" pattern="[0-9]{8}" required>
+                        <button type="button" id="btnFoto" class="btn-scan">Foto</button>
+                    </div>
+                    <div id="datosJugador" style="display: none;">
+                        <button type="submit" class="btn-primary">Registrar Jugador</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Sección de Exportación de Datos -->
+            <section id="seccionDatos">
+                <h2>Exportar Datos</h2>
+                <div class="data-management">
+                    <div class="form-group">
+                        <button id="btnExportar" class="btn-primary">Exportar Datos</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Modal para captura de rostro -->
+            <div id="modalCaptura" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h3>Capturar Rostro</h3>
+                    <div class="camera-container">
+                        <video id="videoModal" autoplay muted></video>
+                        <canvas id="canvasModal" style="display: none;"></canvas>
+                        <button id="btnCapturaModal" class="btn-scan">Tomar Foto</button>
+                    </div>
+                    <div id="estadoFotoModal" class="photo-status">
+                        No se ha tomado la foto
+                    </div>
+                    <button id="btnGuardarModal" class="btn-primary">Guardar</button>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
