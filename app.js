@@ -19,6 +19,7 @@ class JugadoresDB {
         const db = await this.dbPromise;
         await db.put('jugadores', {
             dni: jugador.dni,
+            year: jugador.year,
             descriptorFacial: jugador.descriptorFacial
         });
     }
@@ -122,8 +123,9 @@ class App {
         if (jugador) {
             this.jugadorActual = jugador;
             this.descriptorActual = jugador.descriptorFacial ? new Float32Array(jugador.descriptorFacial) : null;
+            document.getElementById('year').value = jugador.year || '';
             datosJugador.innerHTML = `
-                <div class="dni-registrado">DNI ya registrado. Puede actualizar la foto.</div>
+                <div class="dni-registrado">DNI ya registrado. Puede actualizar los datos.</div>
                 <button type="submit" class="btn-primary">Actualizar Registro</button>
             `;
         } else {
@@ -245,6 +247,7 @@ class App {
 
         const jugador = {
             dni: document.getElementById('dni').value,
+            year: parseInt(document.getElementById('year').value),
             descriptorFacial: Array.from(this.descriptorActual)
         };
 
